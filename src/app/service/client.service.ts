@@ -2,31 +2,32 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../Model/product";
+import {Client} from "../Model/client";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
-  customerBaseUrl:string = '';
+export class ClientService {
+  clientBaseUrl:string = '';
   constructor(private http: HttpClient) { }
 
-  getCustomer(id: number): Observable<any>{
-    return this.http.get(`${this.customerBaseUrl}/${id}`);
+  getClient(id: number): Observable<any>{
+    return this.http.get(`${this.clientBaseUrl}/${id}`);
   }
 
-  createCustomer(customer: Customer): Observable<any>{
-    return this.http.post(`${this.customerBaseUrl}`, customer);
+  createClient(client: Client): Observable<any>{
+    return this.http.post(`${this.clientBaseUrl}`, client);
   }
 
-  updateCustomer(id: number, value: any): Observable<any>{
-    return this.http.put(`${this.customerBaseUrl}/${id}`,value);
+  updateClient(id: number, value: any): Observable<any>{
+    return this.http.put(`${this.clientBaseUrl}/${id}`,value);
   }
 
-  deleteCustomer(id: number): Observable<any>{
-    return this.http.delete(`${this.customerBaseUrl}/${id}`,{responseType: 'text'});
+  deleteClient(id: number): Observable<any>{
+    return this.http.delete(`${this.clientBaseUrl}/${id}`,{responseType: 'text'});
   }
 
-  getCustomerList(): Observable<any>{
-    return this.http.get(`${this.customerBaseUrl}`);
+  getClientList(): Observable<any>{
+    return this.http.get(`${this.clientBaseUrl}`);
   }
 }
