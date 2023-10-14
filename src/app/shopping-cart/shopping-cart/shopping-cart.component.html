@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-title><h2>Your Shopping Cart</h2></mat-card-title>
+  <mat-card-content>
+
+    <div *ngIf="!isCartItemsEmpty; else cartEmpty">
+      <ul>
+        <li *ngFor="let item of cartItems">
+          {{ item.name }} (Quantity: {{ item.quantity }}) - ${{ item.unitPrice * item.quantity }}
+          <button (click)="removeFromCart(item)">Remove</button>
+        </li>
+      </ul>
+      <div>Total: ${{ calculateTotal() }}</div>
+      <button (click)="checkout()">Checkout</button>
+    </div>
+    <ng-template #cartEmpty>
+      <h1>Cart is empty</h1>
+      <img src="/assets/empty.jpg" width="200" height="200">
+    </ng-template>
+  </mat-card-content>
+</mat-card>
+<!--<div >
+  <ul>
+    <li *ngFor="let item of cartItems">
+      {{ item.productName }} (Quantity: {{ item.quantity }}) - ${{ item.price * item.quantity }}
+      <button (click)="removeFromCart(item)">Remove</button>
+    </li>
+  </ul>
+  <div>Total: ${{ calculateTotal() }}</div>
+  <button (click)="checkout()">Checkout</button>
+</div>-->
+

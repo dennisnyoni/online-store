@@ -1,11 +1,28 @@
 import {Product} from "./product";
 import {Address} from "./address";
+import {Client} from "./client";
 
 export class Order {
   private _orderNumber!: bigint;
   private _products!: Product[];
   private _totalPrice!: number;
-  private _billingAddress!: Address;
+  private _creationDate!: Date;
+  private _updateDate!: Date;
+  private _client!: Client;
+
+  public get updateDate(){
+    return this._updateDate
+  }
+  public set updateDate(value){
+    this._updateDate = value;
+  }
+
+  public get creationDate(){
+    return this._creationDate
+  }
+  public set creationDate(value){
+    this._creationDate = value;
+  }
 
   public get orderNumber(){
     return this._orderNumber
@@ -30,11 +47,11 @@ export class Order {
     this._totalPrice = value;
   }
 
-  public get billingAddress (){
-    return this._billingAddress;
+  public get client (){
+    return this._client;
   }
 
-  public set billingAddress (value){
-    this._billingAddress = value;
+  public set client (value){
+    this._client = value;
   }
 }

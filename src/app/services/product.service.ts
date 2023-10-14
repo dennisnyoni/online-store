@@ -11,12 +11,12 @@ export class ProductService {
   productBaseUrl:string = '';
   constructor(private http: HttpClient) { }
 
-  getProduct(id: number): Observable<any>{
+    getProductById(id: number): Observable<any>{
     return this.http.get(`${this.productBaseUrl}/${id}`);
   }
 
-  createProduct(product: Product): Observable<any>{
-    return this.http.post(`${this.productBaseUrl}`, product);
+  createProduct(formData: FormData): Observable<any>{
+    return this.http.post(`${this.productBaseUrl}`, formData);
   }
 
   updateProduct(id: number, value: any): Observable<any>{
@@ -27,7 +27,7 @@ export class ProductService {
     return this.http.delete(`${this.productBaseUrl}/${id}`,{responseType: 'text'});
   }
 
-  getProductList(): Observable<any>{
-    return this.http.get(`${this.productBaseUrl}`);
+  getProductList(): Observable<Product[]>{
+    return this.http.get<Product[]>(`${this.productBaseUrl}`);
   }
 }

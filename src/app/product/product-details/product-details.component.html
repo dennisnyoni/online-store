@@ -1,1 +1,12 @@
-<p>product-details works!</p>
+<div class="product-details">
+    <h2>Product Details</h2>
+    <div class="product">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" />
+        <h3>{{ product.name }}</h3>
+        <h3>{{ id }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Price: ${{ product.unitPrice }}</p>
+        <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
+    </div>
+</div>
+

@@ -5,6 +5,11 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule,} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 
 
 
@@ -16,8 +21,18 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ProductListComponent,
     ProductDetailsComponent
   ],
+    exports: [
+        CreateProductComponent,
+        ProductListComponent
+    ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatIconModule,
+    FormsModule
   ]
 })
 export class ProductModule { }

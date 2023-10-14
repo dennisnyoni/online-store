@@ -1,1 +1,71 @@
-<p>create-product works!</p>
+
+<mat-card class="mat-raised-button" width="50%">
+  <mat-card-header>
+    <mat-card-title><h1>Add Product</h1></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
+      <div width="100%">
+
+        <mat-form-field width="100%">
+          <mat-label>Product name</mat-label>
+          <input matInput id="product-name" type="text" placeholder="name" name="name" formControlName="name"/>
+          <mat-error>product name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+
+        <mat-form-field>
+          <mat-label> Unit price</mat-label>
+          <input matInput id="unit-price" type="number" name="unitPrice" formControlName="unitPrice"/>
+          <mat-error>price cannot be zero</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+
+        <mat-form-field>
+          <mat-label>Category</mat-label>
+          <input matInput id="category" type="text" name="category" formControlName="category"/>
+          <mat-error>please provide category</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div aria-rowindex="100%">
+
+        <mat-form-field style="width: 100%;">
+          <mat-label>Images</mat-label>
+          <button mat-icon-button matPrefix (click)="f_input.click()" style="border: 0px">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+          <input type="text" readonly matInput [formControl]="display" />
+          <input
+            type="file"
+            multiple
+            hidden
+            #f_input
+            (change)="onFileChange(f_input.files)"
+          >
+          <mat-error>this field is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+
+        <mat-form-field>
+          <mat-label> Description</mat-label>
+          <textarea matInput id="description" type="text" name="description" formControlName="description"></textarea>
+          <mat-error>description must be provided</mat-error>
+        </mat-form-field>
+      </div>
+
+
+
+      <input type="submit" class="btn btn-primary"/>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+
+

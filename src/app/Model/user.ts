@@ -8,7 +8,15 @@ export class User {
   private _phone!: string;
   private _address!: Address;
   private _isGuest: boolean = false;
+  private _isActive: boolean = true;
 
+  public get isActive(){
+    return this._isActive;
+  }
+
+  public set isActive(value){
+    this._isActive = value;
+  }
   public get isGuest(){
     return this._isGuest;
   }
