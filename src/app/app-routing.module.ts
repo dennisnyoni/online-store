@@ -10,17 +10,18 @@ import {MakePaymentComponent} from "./payment/make-payment/make-payment.componen
 import {HomeComponent} from "./home/home/home.component";
 import {LoginComponent} from "./login/login.component";
 import {AuthGuardService} from "./services/auth-guard.service";
+import {RegisterComponent} from "./register/register/register.component";
 
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'products', component: ProductListComponent},
     {path: 'add-product', component: CreateProductComponent,  canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR'] }}, //canActivate: [AuthGuard]},
-    {path: 'edit-product', component: EditProductComponent, canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR', 'ADMIN'] }}, //canActivate: [AuthGuard]},
+    //{path: 'edit-product', component: EditProductComponent, canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR', 'ADMIN'] }}, //canActivate: [AuthGuard]},
     {path: 'product-details', component: ProductDetailsComponent},
     {path: 'shopping-cart', component: ShoppingCartComponent},
     {path: 'make-payment', component: MakePaymentComponent},
-   // { path: 'register', component: RegisterComponent },
+    { path: 'register', component: EditProductComponent },
     { path: 'login', component: LoginComponent },
 ]
 

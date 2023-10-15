@@ -10,6 +10,7 @@ import {MatInputModule,} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -25,14 +26,15 @@ import {MatIconModule} from "@angular/material/icon";
         CreateProductComponent,
         ProductListComponent
     ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatIconModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatIconModule,
+        FormsModule,
+        MatSelectModule
+    ]
 })
 export class ProductModule { }

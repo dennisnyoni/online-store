@@ -9,6 +9,15 @@ export class User {
   private _address!: Address;
   private _isGuest: boolean = false;
   private _isActive: boolean = true;
+  private _role!: string;
+
+  public get role(){
+    return this._role;
+  }
+
+  public set role(value){
+    this._role = value;
+  }
 
   public get isActive(){
     return this._isActive;

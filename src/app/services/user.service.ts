@@ -8,7 +8,7 @@ import {User} from "../Model/user";
   providedIn: 'root'
 })
 export class UserService {
-  userBaseUrl:string = '';
+  userBaseUrl:string = '{{api-gateway}}{{user-service}}/users';
   constructor(private http: HttpClient) { }
 
   getUser(id: number): Observable<any>{
