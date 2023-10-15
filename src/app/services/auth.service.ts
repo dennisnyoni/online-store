@@ -7,13 +7,13 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AuthService {
 
-  private apiUrl = 'YOUR_API_URL'; // Replace with your backend API URL
+  private apiUrl = 'localhost:8881/validation/'; // Replace with your backend API URL
   private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { username: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post(`${this.apiUrl}/userlogin`, credentials).pipe(
         tap((response: any) => {
           const token = response.token;
           this.setToken(token);

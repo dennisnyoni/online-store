@@ -8,7 +8,7 @@ import {Product} from "../Model/product";
 })
 export class ProductService {
 
-  productBaseUrl:string = '';
+  productBaseUrl:string = 'localhost:8889/product-service';
   constructor(private http: HttpClient) { }
 
     getProductById(id: number): Observable<any>{

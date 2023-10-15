@@ -5,7 +5,7 @@
       <h2>Product List</h2>
       <div class="product" *ngFor="let product of products">
         <div >
-          <a routerLink="/product-details" (click)="productDetails(product.productId)">
+          <a  (click)="productDetails(product.productId)">
           <img [src]="imageUrl" alt="{{ product.name }}"/>
           </a>
         </div>
@@ -13,7 +13,7 @@
         <!--<h3>{{ product.name }}</h3>-->
         <!--<p>{{ product.description }}</p>-->
         <p>Unit price: ${{ product.unitPrice }}</p>
-        <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
+        <button class="btn btn-primary" (click)="addToCart(product)"><i class="bi bi-cart-plus"></i></button>
       </div>
     </div>
   </mat-card-content>
