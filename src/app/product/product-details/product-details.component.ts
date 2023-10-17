@@ -12,6 +12,7 @@ import {Product} from "../../Model/product";
 })
 export class ProductDetailsComponent {
   id!: number;
+
   product: any;
   imageUrl = 'assets/image2.jpeg'
   constructor(

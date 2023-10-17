@@ -1,5 +1,4 @@
 import {Component, Inject, Input} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
 import {Product} from "../../Model/product";
 import {ProductService} from "../../services/product.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -63,4 +62,7 @@ export class EditProductComponent {
     this.router.navigate(['/product-details']);
   }
 
+  onFileSelected(event: Event) {
+
+  }
 }

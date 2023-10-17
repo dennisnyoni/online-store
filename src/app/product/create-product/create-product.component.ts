@@ -23,7 +23,7 @@ export class CreateProductComponent {
    //productId!: bigint;
    unitPrice!: number;
    category!: string;
-   images!: Array<File> ;
+   images: File[] =[];
    file_store!:FileList;
   productForm!: FormGroup;
   productFormData!: FormData;
@@ -47,7 +47,8 @@ export class CreateProductComponent {
       imageSource: new FormControl('',[Validators.required]),
       availableQuantity: new FormControl('',[Validators.required]),
       productType : new FormControl('',Validators.required),
-      description : new FormControl('',Validators.required)
+      description : new FormControl('',Validators.required),
+      images : new FormControl('',Validators.required),
 
     });
 
@@ -77,25 +78,26 @@ export class CreateProductComponent {
     //this.images = [];
 
     this.product = this.productForm.value;
+    // Append all selected files to the FormData
+    // for (const file of this.images) {
+    //   this.productFormData.append('productImages', file, file.name);
+    // }
+
     this.product.images = this.images;
-        // @ts-ignore
-    //this.product.vendorId = this.authService.getToken().split('.')[3];
     this.product.status = "In Stock";
 
-
-    // for(let i=0;i<this.images.length;i++){
-    //   this.productFormData.append("files", this.file_store[i],this.file_store[i].name);
-    //   //this.product.images = this.images.push(this.file_store[i]);
-    //   //this.images.push(this.file_store[i].name)
-    //   console.log('this.file_store[i] : ',this.file_store[i]);
-    // }
+    console.log('product images when done :',this.product.images);
     this.productFormData.append('product', JSON.stringify(this.product));
 
     //console.log('FormData:',this.productFormData);
     this.productFormData.forEach((value: any, key: any) => {
       console.log(key, value);
     });
-    this.productService.createProduct(this.productFormData);
+    let response='';
+    this.productService.createProduct(this.productFormData).subscribe(
+      data => alert(data),
+      error => alert(error)
+    );
   }
 
 
@@ -107,22 +109,26 @@ export class CreateProductComponent {
     this.router.navigate(['/product-list']);//.then();
   }
 
-  onFileChange(list:any) {
-    this.file_store = list;
-    if(list.length){
-      const file = list[0];
-      const count = list.length > 1?`(+${list.length-1} files)`:"";
-      this.display.patchValue(`${file.name}${count}`);
-      console.log(list);
-      for(let i=0;i<this.images.length;i++){
-        this.productFormData.append("images", this.file_store[i],this.file_store[i].name);
-        //this.product.images = this.images.push(this.file_store[i]);
-        //this.images.push(this.file_store[i].name)
-        //console.log('this.file_store[i] : ',this.file_store[i].arrayBuffer());
-        this.images.push(this.file_store[i]);
-      }
-    }else{
-      this.display.patchValue("");
-    }
+  // onFileChange(list:any) {
+  //   this.file_store = list;
+  //   if(list.length){
+  //     const file = list[0];
+  //     const count = list.length > 1?`(+${list.length-1} files)`:"";
+  //     this.display.patchValue(`${file.name}${count}`);
+  //     //console.log(list);
+  //     for(let i=0;i<this.images.length;i++){
+  //       this.productFormData.append("images", this.file_store[i],this.file_store[i].name);
+  //       //this.product.images = this.images.push(this.file_store[i]);
+  //       //this.images.push(this.file_store[i].name)
+  //       //console.log('this.file_store[i] : ',this.file_store[i].arrayBuffer());
+  //       this.images.push(this.file_store[i]);
+  //     }
+  //     this.product.images = this.images;
+  //   }else{
+  //     this.display.patchValue("");
+  //   }
+  // }
+  onFileSelected(event: any) {
+    this.images = event.target.files;
   }
 }

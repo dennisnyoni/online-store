@@ -17,7 +17,7 @@ const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'products', component: ProductListComponent},
     {path: 'add-product', component: CreateProductComponent},  //canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR'] }}, //canActivate: [AuthGuard]},
-    //{path: 'edit-product', component: EditProductComponent, canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR', 'ADMIN'] }}, //canActivate: [AuthGuard]},
+    {path: 'edit-product', component: EditProductComponent}, //canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR', 'ADMIN'] }}, //canActivate: [AuthGuard]},
     {path: 'product-details', component: ProductDetailsComponent},
     {path: 'shopping-cart', component: ShoppingCartComponent},
     {path: 'make-payment', component: MakePaymentComponent},

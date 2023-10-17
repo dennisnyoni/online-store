@@ -1,12 +1,21 @@
-<div class="product-details">
-    <h2>Product Details</h2>
-    <div class="product">
+
+<mat-card>
+  <mat-card-title><h2>Product Details</h2></mat-card-title>
+  <mat-card-content>
+    <div class="product-details">
+
+      <div class="product">
         <img [src]="product.imageUrl" alt="{{ product.name }}" />
-        <h3>{{ product.name }}</h3>
-        <h3>{{ id }}</h3>
-        <p>{{ product.description }}</p>
-        <p>Price: ${{ product.unitPrice }}</p>
-        <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
+        <h3>name : {{ product.name }}</h3>
+        <h3>Product id : {{ id }}</h3>
+        <p>price : ${{ product.unitPrice }}</p>
+        <p>status: ${{ product.status }}</p>
+        <p>description : {{ product.description }}</p>
+        <button class="btn btn-primary" (click)="addToCart(product)"><i class="bi bi-cart-plus"></i></button>
+      </div>
     </div>
-</div>
+  </mat-card-content>
+</mat-card>
+
+
 

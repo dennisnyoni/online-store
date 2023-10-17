@@ -1,0 +1,130 @@
+<mat-card>
+  <mat-card-title><h2>Edit Product Information</h2></mat-card-title>
+  <mat-card-content>
+    <form class="formwidth" (ngSubmit)="onSubmit()" #editStudentForm="ngForm">
+
+
+      <br />
+
+      <table class="fullwidth" cellspacing="0">
+        <tr>
+          <td>
+            <!--<img src="data:image/jpeg;base64,{{product.image}}" style="width: 120px; height:120" />-->
+          </td>
+          <td>
+            <!--<img [src]="imgUrl" style="width: 120px; height:120" *ngIf="imgUrl"/>-->
+
+          </td>
+          <td>
+            <input type="file" #image accept="image/*" (change)="onFileSelected($event)">
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input matInput placeholder="Product id" id="productId" [(ngModel)]="product.productId" name="importedId"
+                   required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Product name" id="productName" [(ngModel)]="product.name" name="name"
+                     required>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Available quantity" id="surname" [(ngModel)]="product.availableQuantity"
+                     name="availableQuantity" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Approved?" id="approved" [(ngModel)]="product.isApproved" name="approved"
+                     required>
+            </mat-form-field>
+          </td>
+
+          <td>
+
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="dpapplication" placeholder="date added"
+                     id="dateAdded" [(ngModel)]="product.dateAdded" name="dateAdded"
+                     required>
+              <mat-datepicker-toggle matSuffix [for]="dpapplication"></mat-datepicker-toggle>
+              <mat-datepicker #dpapplication></mat-datepicker>
+            </mat-form-field>
+
+          </td>
+        </tr>
+        <tr>
+
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Vendor id" id="vendorId" [(ngModel)]="product.vendorId"
+                     name="vendorId" required>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Status" id="status" [(ngModel)]="product.status"
+                     name="status">
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field>
+          <textarea matInput placeholder="description" id="description" [(ngModel)]="product.description" name="description"
+                    required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="category" id="category" [(ngModel)]="product.category" name="category">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Unit price" id="unitPrice" [(ngModel)]="product.unitPrice"
+                     name="unitPrice" required>
+            </mat-form-field>
+          </td>
+          <td></td>
+          <td>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit" class="btn btn-success" [disabled]="!editStudentForm.valid ">Submit</button>
+
+          </td>
+
+          <td>
+            <button mat-raised-button class="btn btn-danger" (click)="onClose()">Cancel</button>
+          </td>
+
+
+        </tr>
+      </table>
+
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
