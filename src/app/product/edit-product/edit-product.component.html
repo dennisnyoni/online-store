@@ -8,22 +8,17 @@
 
       <table class="fullwidth" cellspacing="0">
         <tr>
+
           <td>
-            <!--<img src="data:image/jpeg;base64,{{product.image}}" style="width: 120px; height:120" />-->
-          </td>
-          <td>
-            <!--<img [src]="imgUrl" style="width: 120px; height:120" *ngIf="imgUrl"/>-->
+            <input type="file" #image accept="image/*" (change)="onFileSelected($event)" multiple>
 
           </td>
-          <td>
-            <input type="file" #image accept="image/*" (change)="onFileSelected($event)">
 
-          </td>
-        </tr>
-        <tr>
           <td>
+            <mat-form-field>
             <input matInput placeholder="Product id" id="productId" [(ngModel)]="product.productId" name="importedId"
                    required>
+            </mat-form-field>
           </td>
         </tr>
         <tr>
@@ -78,19 +73,15 @@
                      name="status">
             </mat-form-field>
           </td>
-
+        </tr>
+        <tr>
           <td>
             <mat-form-field>
           <textarea matInput placeholder="description" id="description" [(ngModel)]="product.description" name="description"
                     required></textarea>
             </mat-form-field>
           </td>
-        </tr>
 
-        <tr>
-          <td>
-
-          </td>
           <td>
             <mat-form-field>
               <input matInput placeholder="category" id="category" [(ngModel)]="product.category" name="category">

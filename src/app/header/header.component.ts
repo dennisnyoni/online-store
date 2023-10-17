@@ -10,7 +10,7 @@ import {AuthService} from "../services/auth.service";
 export class HeaderComponent {
 
   cartItemsQuantity: number=0;
-  noRole:boolean = false;
+  noRole:boolean = true;
 
   constructor(private cartService: ShoppingCartService, private authService: AuthService) {
   }
@@ -37,7 +37,7 @@ export class HeaderComponent {
       this.noRole=false;
       return true;
     }else
-      return true;
+      return false;
 
     //this.noRole=false;
     //return this.authService.getUserRole() === 'ROLE_VENDOR';
