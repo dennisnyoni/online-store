@@ -4,12 +4,12 @@
     <mat-card-title><h1>Add Product</h1></mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
       <div width="100%">
 
         <mat-form-field width="100%">
           <mat-label>Product name</mat-label>
-          <input matInput id="product-name" type="text" placeholder="name" name="name" formControlName="name"/>
+          <input matInput id="product-name" type="text"  name="name" formControlName="productName"/>
           <mat-error>product name is required</mat-error>
         </mat-form-field>
       </div>
@@ -18,8 +18,16 @@
 
         <mat-form-field>
           <mat-label> Unit price</mat-label>
-          <input matInput id="unit-price" type="number" name="unitPrice" formControlName="unitPrice"/>
+          <input matInput id="unit-price" type="number" name="unitPrice" formControlName="unitPrice" required/>
           <mat-error>price cannot be zero</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+
+        <mat-form-field>
+          <mat-label>Product type</mat-label>
+          <input matInput id="productType" type="text" name="productType" formControlName="productType" required/>
+          <mat-error>please provide category</mat-error>
         </mat-form-field>
       </div>
 
@@ -27,7 +35,7 @@
 
         <mat-form-field>
           <mat-label>Category</mat-label>
-          <input matInput id="category" type="text" name="category" formControlName="category"/>
+          <input matInput id="category" type="number" name="category" formControlName="category" required/>
           <mat-error>please provide category</mat-error>
         </mat-form-field>
       </div>
@@ -52,17 +60,24 @@
       </div>
       <div>
 
+        <div>
+          <mat-form-field>
+            <mat-label> Quantiy</mat-label>
+            <input matInput id="quantity" type="number" name="quantity" formControlName="availableQuantity" required/>
+            <mat-error>description must be provided</mat-error>
+          </mat-form-field>
+        </div>
+
         <mat-form-field>
           <mat-label> Description</mat-label>
-          <textarea matInput id="description" type="text" name="description" formControlName="description"></textarea>
+          <textarea matInput id="description" type="text" name="description" formControlName="description" required></textarea>
           <mat-error>description must be provided</mat-error>
         </mat-form-field>
       </div>
 
 
-
       <input type="submit" class="btn btn-primary"/>
-    </div>
+    </form>
 
   </mat-card-content>
 </mat-card>

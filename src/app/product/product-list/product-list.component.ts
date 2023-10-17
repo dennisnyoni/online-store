@@ -41,7 +41,7 @@ export class ProductListComponent {
           this.product.productId = 10000000200;
           this.product.unitPrice = 1093.97;
           this.product.name = 'laptop';
-          this.product.category = 'electronics';
+          this.product.category = 1;
           this.product.images = [];
           this.product.description = 'Core i7 1TB 64GB RAM';
           this.product.isApproved = true;

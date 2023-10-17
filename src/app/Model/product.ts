@@ -1,14 +1,98 @@
 import {Vendor} from "./vendor";
 
+export class ShipOut {
+  private _shipmentId!: number;
+  private _shipmentDate!: Date;
+  private _quantity!: number;
+
+  public get shipmentId(){
+    return this._shipmentId;
+  }
+  public set shipmentId(value){
+    this._shipmentId= value;
+  }
+
+  public get shipmentDate(){
+    return this._shipmentDate;
+  }
+  public set shipmentDate(value){
+    this._shipmentDate= value;
+  }
+  public get quantity(){
+    return this._quantity;
+  }
+  public set quantity(value){
+    this._quantity= value;
+  }
+
+}
+
+export class ShipIn {
+  private _shipmentId!: number;
+  private _shipmentDate!: Date;
+  private _quantity!: number;
+
+  public get shipmentId(){
+    return this._shipmentId;
+  }
+  public set shipmentId(value){
+    this._shipmentId= value;
+  }
+
+  public get shipmentDate(){
+    return this._shipmentDate;
+  }
+  public set shipmentDate(value){
+    this._shipmentDate= value;
+  }
+  public get quantity(){
+    return this._quantity;
+  }
+  public set quantity(value){
+    this._quantity= value;
+  }
+}
+
 export class Product {
-  private _name!: string;
+  private _name!: string;//
   private _productId!: number;
-  private _unitPrice!: number;
-  private _category!: string;
-  private _images!: string[];
-  private _description!: string;
+  private _unitPrice!: number;//
+  private _category!: number;//
+  private _images!: File[];//
+  private _description!: string;//
   private _isApproved!: boolean;
-  //private _vendor!: Vendor;
+  private _vendorId!: string;
+  private _availableQuantity!: number;
+  private _status: string = 'available';
+  private _dateAdded: Date= new Date();
+
+
+  public get dateAdded(){
+    return this._dateAdded;
+  }
+  public set dateAdded(value){
+    this._dateAdded= value;
+  }
+
+  public get status(){
+    return this._status;
+  }
+  public set status(value){
+    this._status= value;
+  }
+
+  public get availableQuantity(){
+    return this._availableQuantity;
+  }
+  public set availableQuantity(value){
+    this._availableQuantity= value;
+  }
+  public get vendorId(){
+    return this._vendorId;
+  }
+  public set vendorId(value){
+    this._vendorId = value;
+  }
 
   public get unitPrice(){
     return this._unitPrice;

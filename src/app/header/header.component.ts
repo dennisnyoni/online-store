@@ -10,6 +10,7 @@ import {AuthService} from "../services/auth.service";
 export class HeaderComponent {
 
   cartItemsQuantity: number=0;
+  noRole:boolean = true;
 
   constructor(private cartService: ShoppingCartService, private authService: AuthService) {
   }
@@ -19,14 +20,34 @@ export class HeaderComponent {
   }
 
   isCustomer(): boolean {
-    return this.authService.getUserRole() === 'CUSTOMER';
+
+    if(this.authService.getUserRole() === 'ROLE_CUSTOMER'){
+      this.noRole=false;
+      return true;
+    }else
+      return false;
+
+    //this.noRole=false;
+    //return this.authService.getUserRole() === 'ROLE_CUSTOMER';
   }
 
   isVendor(): boolean {
-    return this.authService.getUserRole() === 'VENDOR';
+
+    if(this.authService.getUserRole() === 'ROLE_VENDOR'){
+      this.noRole=false;
+      return true;
+    }else
+      return false;
+
+    //this.noRole=false;
+    //return this.authService.getUserRole() === 'ROLE_VENDOR';
   }
 
   isAdmin(): boolean {
-    return this.authService.getUserRole() === 'ADMIN';
+    if(this.authService.getUserRole() === 'ROLE_ADMIN'){
+      this.noRole=false;
+      return true;
+    }else
+      return false;
   }
 }

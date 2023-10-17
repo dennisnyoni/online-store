@@ -2,13 +2,48 @@ import {Product} from "./product";
 import {Address} from "./address";
 import {Client} from "./client";
 
+export class Item {
+  private _name!: string;
+  private _price!: number;
+  private _quantity!: number;
+
+  public get name(){
+    return this._name
+  }
+  public set name(value: string){
+    this._name = value;
+  }
+  public get price(){
+    return this._price
+  }
+  public set price(value: number){
+    this._quantity = value;
+  }
+
+  public get quantity(){
+    return this._quantity
+  }
+  public set quantity(value: number){
+    this._quantity = value;
+  }
+
+}
+
 export class Order {
   private _orderNumber!: bigint;
-  private _products!: Product[];
-  private _totalPrice!: number;
-  private _creationDate!: Date;
+  private _items!: Item[];
+  private _total!: number;
+  private _orderedDate!: Date;
   private _updateDate!: Date;
-  private _client!: Client;
+  private _userId!: string;
+  private _status!: string;
+
+  public get status(){
+    return this._status
+  }
+  public set status(value){
+    this._status = value;
+  }
 
   public get updateDate(){
     return this._updateDate
@@ -17,11 +52,11 @@ export class Order {
     this._updateDate = value;
   }
 
-  public get creationDate(){
-    return this._creationDate
+  public get orderedDate(){
+    return this._orderedDate
   }
-  public set creationDate(value){
-    this._creationDate = value;
+  public set orderedDate(value){
+    this._orderedDate = value;
   }
 
   public get orderNumber(){
@@ -31,27 +66,27 @@ export class Order {
     this._orderNumber = value;
   }
 
-  public get products (){
-    return this._products
+  public get items (){
+    return this._items
   }
 
-  public set products (value){
-    this._products = value;
+  public set items (value){
+    this._items = value;
   }
 
-  public get totalPrice (){
-    return this._totalPrice;
+  public get total (){
+    return this._total;
   }
 
-  public set totalPrice (value  ){
-    this._totalPrice = value;
+  public set total (value  ){
+    this._total = value;
   }
 
   public get client (){
-    return this._client;
+    return this._userId;
   }
 
-  public set client (value){
-    this._client = value;
+  public set userId (value: string){
+    this._userId = value;
   }
 }

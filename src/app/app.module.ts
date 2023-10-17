@@ -30,6 +30,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {JwtInterceptor} from "./jwt-interceptor";
+import { FileUploadModule } from "ng2-file-upload";
 
 export function jwtOptionsFactory() {
     return {
@@ -69,6 +70,7 @@ export function jwtOptionsFactory() {
         MatInputModule,
         ReactiveFormsModule,
         MatSelectModule,
+        FileUploadModule,
         JwtModule.forRoot({
             jwtOptionsProvider: {
                 provide: JWT_OPTIONS,
