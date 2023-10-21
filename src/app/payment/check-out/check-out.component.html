@@ -51,7 +51,7 @@
           <h4>Enter payment details</h4>
 
           <div class="stripe-element">
-            <ngx-stripe-card
+            <ngx-stripe-card #paymentElement
               [options]="cardOptions"
               [elementsOptions]="elementsOptions"
             ></ngx-stripe-card>
@@ -68,7 +68,7 @@
         <!--<button type="submit" (click)="pay(payment_method)">Submit Payment</button>-->
       </form>
       <div class="form-group">
-        <!-->Credit or Debit Card</label>-->
+        <!--Credit or Debit Card</label>-->
         <div #cardElement class="StripeElement"></div>
       </div>
 

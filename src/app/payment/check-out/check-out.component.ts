@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {HttpClient} from "@angular/common/http";
 //import {StripeCardComponent, StripeService} from "ngx-stripe";
@@ -6,7 +6,8 @@ import {HttpClient} from "@angular/common/http";
 //import { StripeService, Elements, Element } from 'ngx-stripe'; // Import Element instead of StripeElement
 import {StripeService, StripeCardComponent, StripePaymentElementComponent} from 'ngx-stripe';
 import {
-  StripeCardElementOptions,
+  Stripe,
+  StripeCardElementOptions, StripeElements,
   StripeElementsOptions
 } from '@stripe/stripe-js';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -18,21 +19,28 @@ import {OrderService} from "../../services/order.service";
 import {Order} from "../../Model/order";
 
 
+
 //declare var StripeCheckoutStatic;
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css']
 })
-export class CheckOutComponent {
+export class CheckOutComponent implements AfterViewInit{
 
-  @ViewChild(StripePaymentElementComponent)
-  paymentElement!: StripePaymentElementComponent;
+  //@ViewChild(StripePaymentElementComponent)
+  //paymentElement!: StripePaymentElementComponent;
+  @ViewChild('paymentElement') paymentElement!: ElementRef;
+
+  stripe!: Stripe;
+  elements!: StripeElements;
 
   @ViewChild(StripeCardComponent)
   cardElement!: StripeCardComponent;
   paying = false;
-  elementOptions!: StripeElementsOptions;
+  elementOptions: StripeElementsOptions={
+    clientSecret: environment.stripe.testKey
+  };
   amount!: number;
 
 
@@ -70,60 +78,72 @@ export class CheckOutComponent {
   payment_method: any;
 
   ngOnInit(): void {
+    //this.elementsOptions.clientSecret = environment.stripe.testKey;
     this.amount = this.shoppingCartService.calculateTotal();
     console.log('shopping cart total: ',this.amount);
-    this.createPaymentIntent(this.amount)
-      .subscribe(pi => {
-        this.elementsOptions.clientSecret = pi.client_secret;
-
-      });
+    // this.createPaymentIntent(this.amount)
+    //   .subscribe(pi => {
+    //     this.elementsOptions.clientSecret = pi.client_secret;
+    //
+    //   });
   }
 
+  ngAfterViewInit(): void {
+    //this.stripe = this.stripeService.getInstance(); // Replace with your publishable key
+    this.elements = this.stripe.elements();
+  }
   pay(){
-    console.log('elementsoptions :', this.cardOptions)
-    if(this.paymentForm.valid){
-      this.paying = true;
-      this.stripeService.confirmPayment({
-        elements: this.paymentElement.elements,
-        confirmParams: {
-          payment_method_data:{
-            billing_details:{
-              name: this.paymentForm.get('name')?.value,
-              email: this.paymentForm.get('email')?.value,
-              address: {
-                line1: this.paymentForm.get('street')?.value || '',
-                postal_code: this.paymentForm.get('zipcode')?.value || '',
-                city: this.paymentForm.get('city')?.value || '',
-              }
-            }
-          }
-        },
-        redirect: 'if_required'
-      }).subscribe((result) => {
-        this.paying = false;
-        console.log('Result', result);
-        if(result.error){
-          alert(result.error.message);
-        }else{
-          if(result.paymentIntent.status === 'succeeded'){
-            alert({success: true});
 
-            this.orderService.createOrder(new Order());
 
-          }
-        }
-      });
-    }else {
-      console.log(this.paymentForm)
-    }
+     console.log('elementsoptions :', this.cardOptions)
+    console.log('elements',this.paymentElement.nativeElement);
+     if(this.paymentForm.valid){
+       this.paying = true;
+       this.stripeService.confirmPayment({
+         elements:  this.paymentElement.nativeElement,
+            clientSecret:environment.stripe.testKey,
+         confirmParams: {
+           payment_method_data:{
+             billing_details:{
+               name: this.paymentForm.get('name')?.value,
+               email: this.paymentForm.get('email')?.value,
+               address: {
+                 line1: this.paymentForm.get('street')?.value || '',
+                 postal_code: this.paymentForm.get('zipcode')?.value || '',
+                 city: this.paymentForm.get('city')?.value || '',
+               }
+             }
+           }
+         },
+         redirect: 'if_required'
+       }).subscribe((result) => {
+         console.log('elements',this.paymentElement.nativeElement);
+         this.paying = false;
+         console.log('Result', result);
+         if(result.error){
+           alert(result.error.message);
+         }else{
+           if(result.paymentIntent.status === 'succeeded'){
+             alert({success: true});
+
+             this.orderService.createOrder(new Order());
+
+           }
+         }
+       });
+     }else {
+       console.log(this.paymentForm)
+     }
   }
 
-  private createPaymentIntent(amount: number): Observable<PaymentIntent> {
-    return this.http.post<PaymentIntent>(
-      `${environment.paymentApiUrl}/create-payment-intent`,{amount}
-      //`${env.apiUrl}/create-payment-intent`,{amount}
-    );
 
-  }
+
+  // private createPaymentIntent(amount: number): Observable<PaymentIntent> {
+  //   return this.http.post<PaymentIntent>(
+  //     `${environment.paymentApiUrl}/create-payment-intent`,{amount}
+  //     //`${env.apiUrl}/create-payment-intent`,{amount}
+  //   );
+  //
+  // }
 
 }
