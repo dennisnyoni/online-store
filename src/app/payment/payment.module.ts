@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { CheckOutComponent } from './check-out/check-out.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
+import {OrderModule} from "../order/order.module";
 
 
 
@@ -32,7 +33,8 @@ import {MatCardModule} from "@angular/material/card";
     StripeCardGroupDirective,
     StripeCardComponent,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    OrderModule
   ]
 })
 export class PaymentModule { }

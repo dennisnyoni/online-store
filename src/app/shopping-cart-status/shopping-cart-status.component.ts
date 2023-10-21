@@ -10,9 +10,20 @@ export class ShoppingCartStatusComponent {
 
   cartItems: any[] = [];
   total: number = 0;
+  totalQuantity: number = 0;
 
   constructor(private shoppingCartService: ShoppingCartService) {
-    this.cartItems = shoppingCartService.getCartItems();
+
     //this.total = shoppingCartService.;
+    for(let item of this.shoppingCartService.getCartItems()){
+      this.totalQuantity += item.quantity;
+    }
+  }
+
+  ngOnInit(){
+    for(let item of this.shoppingCartService.getCartItems()){
+      this.totalQuantity += item.quantity;
+    }
+
   }
 }

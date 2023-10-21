@@ -74,8 +74,7 @@ export class CreateProductComponent {
   }
 
   onSubmit(data: any){
-    //let formData = new FormData();
-    //this.images = [];
+
 
     this.product = this.productForm.value;
     // Append all selected files to the FormData
@@ -85,6 +84,7 @@ export class CreateProductComponent {
 
     this.product.images = this.images;
     this.product.status = "In Stock";
+    this.product.vendorId = this.authService.decodeJwtToken(this.authService.getToken()).vendorId;
 
     console.log('product images when done :',this.product.images);
     this.productFormData.append('product', JSON.stringify(this.product));
@@ -106,28 +106,9 @@ export class CreateProductComponent {
   }
 
   gotoList(){
-    this.router.navigate(['/product-list']);//.then();
+    this.router.navigate(['/products']);//.then();
   }
 
-  // onFileChange(list:any) {
-  //   this.file_store = list;
-  //   if(list.length){
-  //     const file = list[0];
-  //     const count = list.length > 1?`(+${list.length-1} files)`:"";
-  //     this.display.patchValue(`${file.name}${count}`);
-  //     //console.log(list);
-  //     for(let i=0;i<this.images.length;i++){
-  //       this.productFormData.append("images", this.file_store[i],this.file_store[i].name);
-  //       //this.product.images = this.images.push(this.file_store[i]);
-  //       //this.images.push(this.file_store[i].name)
-  //       //console.log('this.file_store[i] : ',this.file_store[i].arrayBuffer());
-  //       this.images.push(this.file_store[i]);
-  //     }
-  //     this.product.images = this.images;
-  //   }else{
-  //     this.display.patchValue("");
-  //   }
-  // }
   onFileSelected(event: any) {
     this.images = event.target.files;
   }

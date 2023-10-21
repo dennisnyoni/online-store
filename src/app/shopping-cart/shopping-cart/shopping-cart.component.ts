@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ShoppingCartService} from "../../services/shopping-cart.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,7 +12,7 @@ export class ShoppingCartComponent {
   isCartItemsEmpty:boolean = true;
 
 
-  constructor(private cartService: ShoppingCartService) { }
+  constructor(private cartService: ShoppingCartService, private router: Router) { }
 
   ngOnInit(): void {
     // Fetch cart items from the services when the component initializes
@@ -28,16 +29,28 @@ export class ShoppingCartComponent {
   }
 
   calculateTotal(): number {
-    // Calculate the total cost of items in the cart
-    let total = 0;
-    for (const item of this.cartItems) {
-      total += item.price * item.quantity;
+
+    return this.cartService.calculateTotal();
+  }
+
+  itemsInCart(): number{
+    let totalNumItems: number=0;
+    for(let item of this.cartItems){
+      totalNumItems +=item.quantity;
     }
-    return total;
+    return totalNumItems;
+  }
+
+  incrementQuantity(product: string) {
+    this.cartService.incrementItemQuantity(product);
+  }
+
+  decrementQuantity(product: string) {
+    this.cartService.decrementItemQuantity(product);
   }
 
   checkout(): void {
     // Implement the checkout logic, e.g., navigate to a checkout page
-    // This can involve calling a backend API for payment processing
+    this.router.navigate(['check-out']);
   }
 }

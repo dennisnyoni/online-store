@@ -2,10 +2,12 @@
   <mat-card-title><h2>Your Shopping Cart</h2></mat-card-title>
   <mat-card-content>
 
-    <div *ngIf="!isCartItemsEmpty; else cartEmpty">
+    <div *ngIf="itemsInCart(); else cartEmpty">
       <ul>
         <li *ngFor="let item of cartItems">
           {{ item.name }} (Quantity: {{ item.quantity }}) - ${{ item.unitPrice * item.quantity }}
+          <button (click)="incrementQuantity(item)"><i class="fa-plus"></i></button>
+          <button (click)="decrementQuantity(item)"><i class="fa-minus-circle"></i></button>
           <button (click)="removeFromCart(item)">Remove</button>
         </li>
       </ul>

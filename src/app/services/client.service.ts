@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../Model/product";
 import {Client} from "../Model/client";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  clientBaseUrl:string = '';
+  clientBaseUrl:string = environment.clientBaseUrl;
   constructor(private http: HttpClient) { }
 
   getClient(id: number): Observable<any>{

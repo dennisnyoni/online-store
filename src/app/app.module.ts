@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NgxStripeModule } from "ngx-stripe";
+//import { StripeModule } from "ngx-stripe";
 import { environment } from "../../environment";
 import { BrowserModule } from '@angular/platform-browser';
 //import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -26,11 +27,15 @@ import {AdminDashBoardComponent} from "./dashboards/admin-dash-board/admin-dash-
 import {VendorDashBoardComponent} from "./dashboards/vendor-dash-board/vendor-dash-board.component";
 import {RegisterComponent} from "./register/register.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatIconModule} from "@angular/material/icon";
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from "@angular/material/select";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {JwtInterceptor} from "./jwt-interceptor";
 import { FileUploadModule } from "ng2-file-upload";
+import { SearchComponent } from './search/search.component';
+import {UserModule} from "./user/user.module";
+import { GuestDashBoardComponent } from './dashboards/guest-dash-board/guest-dash-board.component';
 
 export function jwtOptionsFactory() {
     return {
@@ -51,7 +56,9 @@ export function jwtOptionsFactory() {
     AdminDashBoardComponent,
     VendorDashBoardComponent,
     CustomerDashBoardComponent,
-      RegisterComponent
+      RegisterComponent,
+      SearchComponent,
+      GuestDashBoardComponent
   ],
 
     imports: [
@@ -61,7 +68,10 @@ export function jwtOptionsFactory() {
         ProductModule,
         HttpClientModule,
         MatDialogModule,
+      MatButtonModule,
+      MatIconModule,
         PaymentModule,
+      UserModule,
         ShoppingCartModule,
         AppRoutingModule,
         RouterTestingModule,

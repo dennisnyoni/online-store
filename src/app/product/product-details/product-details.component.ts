@@ -12,9 +12,10 @@ import {Product} from "../../Model/product";
 })
 export class ProductDetailsComponent {
   id!: number;
-
+  currentIndex: number = 0;
   product: any;
   imageUrl = 'assets/image2.jpeg'
+  currentImage: any;
   constructor(
       private route: ActivatedRoute,private router: Router,
       public dialogRef: MatDialogRef<ProductDetailsComponent>,
@@ -47,4 +48,23 @@ export class ProductDetailsComponent {
      this.router.navigate(['products']);
   }
 
+  previousImage() {
+    if(this.currentIndex>0){
+      this.currentIndex--;
+      this.loadCurrentImage(this.currentIndex);
+    }
+  }
+
+  nextImage() {
+    if(this.currentIndex<this.product.images.length - 1){
+      this.currentIndex++;
+      this.loadCurrentImage(this.currentIndex);
+    }
+
+  }
+
+  loadCurrentImage(index: number) {
+    // Fetch the image file from the server based on this.images[this.currentIndex]
+    this.currentImage=this.product.images[index];
+  }
 }

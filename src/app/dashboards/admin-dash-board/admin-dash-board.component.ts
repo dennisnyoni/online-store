@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-dash-board.component.css']
 })
 export class AdminDashBoardComponent {
+  firstName: string= 'John';
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../Model/product";
 
@@ -29,5 +29,19 @@ export class ProductService {
 
   getProductList(): Observable<Product[]>{
     return this.http.get<Product[]>(`${this.productBaseUrl}`);
+  }
+
+  searchProducts(filterCriteria: any):Observable<Product[]> {
+    // Create a new HttpParams object to handle query parameters
+    let params = new HttpParams();
+
+    // Iterate through the filter criteria object and add them to the params
+    for (const key in filterCriteria) {
+      if (filterCriteria.hasOwnProperty(key)) {
+        params = params.set(key, filterCriteria[key]);
+      }
+    }
+
+    return this.http.get<Product[]>(`${this.productBaseUrl}/products`, { params });
   }
 }

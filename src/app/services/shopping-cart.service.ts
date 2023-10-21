@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../Model/product";
 import {ShoppingCart} from "../Model/shopping-cart";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import {ShoppingCart} from "../Model/shopping-cart";
 export class ShoppingCartService {
 
   cartItems: any[] = [];
-  shoppingCartBaseUrl:string = '';
+  shoppingCartBaseUrl:string = environment.shoppingCartBaseUrl;
   constructor(private http: HttpClient) { }
 
   getShoppingCart(id: number): Observable<any>{
@@ -64,6 +65,28 @@ export class ShoppingCartService {
   // Clear the entire cart
   clearCart(): void {
     this.cartItems = [];
+  }
+
+  calculateTotal(): number {
+    let total = 0;
+    for (const item of this.cartItems) {
+      total += item.price * item.quantity;
+    }
+    return total;
+  }
+
+  incrementItemQuantity(product: string) {
+    const item = this.cartItems.find((item) => item.product === product);
+    if (item) {
+      item.quantity += 1;
+    }
+  }
+
+  decrementItemQuantity(product: string) {
+    const item = this.cartItems.find((item) => item.product === product);
+    if (item && item.quantity > 1) {
+      item.quantity -= 1;
+    }
   }
 
 }

@@ -14,6 +14,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 
@@ -29,20 +31,22 @@ import {MatNativeDateModule} from "@angular/material/core";
         CreateProductComponent,
         ProductListComponent
     ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatCardModule,
-        MatIconModule,
-        FormsModule,
-        MatSelectModule,
-        MatDatepickerModule,
-      MatDatepickerModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatNativeDateModule
-    ]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatIconModule,
+    FormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule
+  ]
 })
 export class ProductModule { }

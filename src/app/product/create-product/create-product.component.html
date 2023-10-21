@@ -42,19 +42,7 @@
 
       <div aria-rowindex="100%">
 
-        <!--<mat-form-field style="width: 100%;">
-          <label>Images</label>
-          <button mat-icon-button matPrefix (click)="f_input.click()" style="border: 0px">
-            <mat-icon>attach_file</mat-icon>
-          </button>
-          <input type="text" readonly matInput [formControl]="display" />-->
-          <!--<input
-            type="file"
-            multiple
-            hidden
-            #f_input
-            (change)="onFileChange(f_input.files)"
-          >-->
+
           <input type="file" name="productImages" (change)="onFileSelected($event)" multiple>
           <!--<mat-error>this field is required</mat-error>
         </mat-form-field>-->

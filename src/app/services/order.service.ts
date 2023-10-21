@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Client} from "../Model/client";
 import {Order} from "../Model/order";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  orderBaseUrl:string = '';
+  orderBaseUrl:string = environment.orderBaseUrl;
   constructor(private http: HttpClient) { }
 
   getOrder(id: number): Observable<any>{

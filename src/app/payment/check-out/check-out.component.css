@@ -1,0 +1,58 @@
+mat-card { margin: 20%; padding: 1%; box-shadow: black; border: chocolate}
+
+.payment {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.payment h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#payment-form {
+  text-align: left;
+}
+
+.stripe-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stripe-element h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.stripe-element {
+  margin-bottom: 15px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Style for the submit button */
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

@@ -24,7 +24,7 @@ export class MakePaymentComponent implements OnInit{
 
   stripe!: Stripe;
   elements!: StripeElements;
-
+/*
   constructor() {}
 
   ngAfterViewInit(): void {
@@ -88,11 +88,11 @@ export class MakePaymentComponent implements OnInit{
 
   elementsOptions: StripeElementsOptions = {
     locale: 'en',
-  };
-  /*@ViewChild(StripePaymentElementComponent)
+  };*/
+  @ViewChild(StripePaymentElementComponent)
   paymentElement!: StripePaymentElementComponent;
   paying = false;
-  //elementOptions!: StripeElementsOptions;
+  elementOptions!: StripeElementsOptions;
 
   public cardOptions:StripeCardElementOptions = {
     style:{
@@ -172,5 +172,6 @@ export class MakePaymentComponent implements OnInit{
       //`${env.apiUrl}/create-payment-intent`,{amount}
     );
 
-  }*/
+  }
+
 }

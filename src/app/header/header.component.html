@@ -1,8 +1,8 @@
 
-<div class="app-header">
+<!--<div class="app-header">-->
 
-  <!-- Display customer header for customers -->
-  <app-customer-dash-board *ngIf="noRole"></app-customer-dash-board>
+  <!-- Display guest header for guest customers -->
+  <app-guest-dash-board *ngIf="hasNoRole()"></app-guest-dash-board>
 
   <!-- Display customer header for customers -->
   <app-customer-dash-board *ngIf="isCustomer()"></app-customer-dash-board>
@@ -12,6 +12,6 @@
 
   <!-- Display admin header for administrators -->
   <app-admin-dash-board *ngIf="isAdmin()"></app-admin-dash-board>
-</div>
+<!--</div>-->
 
 

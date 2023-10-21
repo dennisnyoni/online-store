@@ -3,6 +3,15 @@ export class Address {
   private _street!: string;
   private _city!: string;
   private _state!: string;
+  private _zipcode!: string;
+
+  public get zipcode(){
+    return this._zipcode;
+  }
+
+  public set zipcode(value){
+    this._zipcode = value;
+  }
 
   public get street(){
     return this._street;

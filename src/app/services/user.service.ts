@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Client} from "../Model/client";
 import {User} from "../Model/user";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  userBaseUrl:string = '{{api-gateway}}{{user-service}}/users';
+  userBaseUrl:string = environment.userBaseUrl;
   constructor(private http: HttpClient) { }
 
   getUser(id: number): Observable<any>{

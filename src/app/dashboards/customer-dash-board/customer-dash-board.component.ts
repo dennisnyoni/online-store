@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./customer-dash-board.component.css']
 })
 export class CustomerDashBoardComponent {
+  firstName: any;
 
 }

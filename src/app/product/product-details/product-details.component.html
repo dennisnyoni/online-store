@@ -3,9 +3,14 @@
   <mat-card-title><h2>Product Details</h2></mat-card-title>
   <mat-card-content>
     <div class="product-details">
+      <div class="image-carousel">
+        <button (click)="previousImage()"><i class="fa-solid fa-angle-left"></i></button>
+        <img src="data:image/jpeg;base64,{{currentImage}}" style="width: 80px; height:80"  alt="Image of {{ product.name }}"/>
 
+        <button (click)="nextImage()"><i class="fa-solid fa-angle-right"></i></button>
+      </div>
       <div class="product">
-        <img [src]="product.imageUrl" alt="{{ product.name }}" />
+        <!--<img [src]="imageUrl" alt="{{ product.name }}" />-->
         <h3>name : {{ product.name }}</h3>
         <h3>Product id : {{ id }}</h3>
         <p>price : ${{ product.unitPrice }}</p>
@@ -16,6 +21,7 @@
     </div>
   </mat-card-content>
 </mat-card>
+
 
 
 

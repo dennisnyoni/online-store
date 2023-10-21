@@ -4,13 +4,14 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Order} from "../Model/order";
 import {Payment} from "../Model/payment";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
 
-  paymentBaseUrl:string = '';
+  paymentBaseUrl:string = environment.paymentBaseUrl;
   constructor(private http: HttpClient) { }
 
   getPayment(id: number): Observable<any>{

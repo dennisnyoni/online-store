@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./vendor-dash-board.component.css']
 })
 export class VendorDashBoardComponent {
+  firstName:string = 'Julius';
 
 }

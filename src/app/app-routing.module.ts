@@ -11,6 +11,11 @@ import {HomeComponent} from "./home/home/home.component";
 import {LoginComponent} from "./login/login.component";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {RegisterComponent} from "./register/register.component";
+import {UserListComponent} from "./user/user-list/user-list.component";
+import {CreateUserComponent} from "./user/create-user/create-user.component";
+import {UserDetailsComponent} from "./user/user-details/user-details.component";
+import {DeleteUserComponent} from "./user/delete-user/delete-user.component";
+import {CheckOutComponent} from "./payment/check-out/check-out.component";
 
 
 const routes: Routes = [
@@ -23,6 +28,11 @@ const routes: Routes = [
     {path: 'make-payment', component: MakePaymentComponent},
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
+  { path: 'user-list', component: UserListComponent },
+  { path: 'add-user', component: CreateUserComponent },
+  { path: 'user-details', component: UserDetailsComponent },
+  { path: 'delete-user', component: DeleteUserComponent },
+  { path: 'check-out', component: CheckOutComponent },
 ]
 
 @NgModule({

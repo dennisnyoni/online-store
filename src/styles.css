@@ -2,5 +2,5 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 html, body { height: 100%; }
 body { margin: 10px; bottom:10px; top: 5px; font-family: Roboto, "Helvetica Neue", sans-serif; }
-mat-card { margin: 10%; padding: 1%; box-shadow: black}
+mat-card { margin: 3%; padding: 1%; box-shadow: black}
 mat-form-field { width: 100%;}

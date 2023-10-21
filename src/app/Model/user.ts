@@ -1,8 +1,9 @@
 import {Address} from "./address";
 
 export class User {
-  private _firstname!: string;
-  private _lastname!: string;
+  private _userName!: string;
+  private _firstName!: string;
+  private _lastName!: string;
   private _email!: string;
   private _password!: string;
   private _phone!: string;
@@ -10,6 +11,16 @@ export class User {
   private _isGuest: boolean = false;
   private _isActive: boolean = true;
   private _role!: string;
+
+
+  public get userName(){
+    return this._userName;
+  }
+
+  public set userName(value){
+    this._userName = value;
+  }
+
 
   public get role(){
     return this._role;
@@ -63,18 +74,18 @@ export class User {
   public set email(value){
     this._email = value;
   }
-  public get lastname(){
-    return this._lastname;
+  public get lastName(){
+    return this._lastName;
   }
 
-  public set lastname(value){
-    this._lastname = value;
+  public set lastName(value){
+    this._lastName = value;
   }
-  public get firstname(){
-    return this._firstname;
+  public get firstName(){
+    return this._firstName;
   }
-  public set firstname(value){
-    this._firstname = value;
+  public set firstName(value){
+    this._firstName = value;
   }
 
 }

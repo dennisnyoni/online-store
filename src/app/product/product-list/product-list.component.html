@@ -1,21 +1,157 @@
-<mat-card>
-  <mat-card-title>Products</mat-card-title>
-  <mat-card-content>
-    <div class="product-list">
-      <h2>Product List</h2>
-      <div class="product" *ngFor="let product of products">
-        <div >
-          <a  (click)="productDetails(product.productId)">
-          <img [src]="imageUrl" alt="{{ product.name }}"/>
-          </a>
+
+
+<br/>
+<br/>
+<div *ngIf="enableSearch">
+  <mat-card>
+    <mat-card-title>Search</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="searchProducts()">
+        <div>
+          <mat-form-field style="margin-right:2rem; width:17%">
+            <mat-label>Product Name:</mat-label>
+            <input matInput type="text" [(ngModel)]="productName" name="productName" id="productName">
+          </mat-form-field>
+
+          <mat-form-field style="margin-right:2rem; width:13%">
+            <mat-label>Type:</mat-label>
+            <input  matInput type="text" [(ngModel)]="productType" name="type" id="type">
+          </mat-form-field>
+
+          <mat-form-field style="margin-right:2rem; width:13%">
+            <mat-label>Category:</mat-label>
+            <input  matInput type="text" [(ngModel)]="category" name="category" id="category">
+          </mat-form-field>
+
+          <mat-form-field style="margin-right:2rem; width:13%">
+            <mat-label>Price:</mat-label>
+            <input  matInput  type="number" [(ngModel)]="price" name="price" id="price">
+          </mat-form-field>
+
+          <button type="submit"><i class="bi bi-search"></i></button>
         </div>
 
-        <!--<h3>{{ product.name }}</h3>-->
-        <!--<p>{{ product.description }}</p>-->
-        <p>Unit price: ${{ product.unitPrice }}</p>
-        <button class="btn btn-primary" (click)="addToCart(product)"><i class="bi bi-cart-plus"></i></button>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="isVendor() || isAdmin()">
+  <span><b>Products</b></span>
+  <br />
+  <br />
+  <div class="search-div">
+       <button *ngIf="isVendor()" mat-raised-button (click)="onCreate()">
+        <mat-icon>add</mat-icon>Create
+      </button>
+
+    <mat-form-field class="search-form-field">
+      <input matInput [(ngModel)]="searchKey" placeholder="Search" (keyup)="applyFilter()">
+      <!--<button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>-->
+      <button  matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="listData" class="table table-striped" matSort>
+    <!--<mat-table [dataSource]="products" class="table table-striped" matSort>-->
+    <ng-container matColumnDef="product_id">
+      <mat-header-cell *matHeaderCellDef>product id </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.productId}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="product_name">
+      <mat-header-cell *matHeaderCellDef>product name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.productName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date_added">
+      <mat-header-cell *matHeaderCellDef>date added</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.dateAdded}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit_price">
+      <mat-header-cell *matHeaderCellDef>unit price</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.unitPrice}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>status</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="productDetails(row.id)">
+          <mat-icon>details</mat-icon>
+        </button>
+
+        <button *ngIf="isVendor()" mat-icon-button (click)="onEdit(row.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button *ngIf="isVendor()" mat-icon-button color="warn" (click)="deleteProduct(row.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="loading">
+
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data ...
+      </mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="noData">
+
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null&&listData.data.length==0)}">
+    </mat-footer-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFisrtLastButtons></mat-paginator>
+  <!--export to excel:
+  <button (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:18px;color:green"></i></button>-->
+
+  </div>
+
+</div>
+
+<div *ngIf="isCustomer() || hasNoRole()">
+  <mat-card>
+    <mat-card-title>Products</mat-card-title>
+    <mat-card-content>
+      <div class="product-list">
+        <h2>Product List</h2>
+        <div class="product" *ngFor="let product of products">
+          <div >
+            <!--<a  (click)="productDetails(product.productId)">-->
+              <img (click)="productDetails(product.productId)" [src]="imageUrl" alt="{{ product.name }}"/>
+            <!--</a>-->
+          </div>
+
+          <!--<h3>{{ product.name }}</h3>-->
+          <!--<p>{{ product.description }}</p>-->
+          <p>Unit price: ${{ product.unitPrice }}</p>
+          <button class="btn btn-primary" (click)="addToCart(product)"><i class="bi bi-cart-plus"></i></button>
+        </div>
       </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
 
