@@ -16,6 +16,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {ShoppingCartModule} from "../shopping-cart/shopping-cart.module";
+import {AppModule} from "../app.module";
 
 
 
@@ -46,7 +48,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatFormFieldModule,
     MatNativeDateModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ShoppingCartModule,
+    AppModule
   ]
 })
 export class ProductModule { }

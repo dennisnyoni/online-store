@@ -1,9 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
 import {HttpClient} from "@angular/common/http";
-//import {StripeCardComponent, StripeService} from "ngx-stripe";
-//import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-//import { StripeService, Elements, Element } from 'ngx-stripe'; // Import Element instead of StripeElement
 import {StripeService, StripeCardComponent, StripePaymentElementComponent} from 'ngx-stripe';
 import {
   Stripe,
@@ -16,7 +12,8 @@ import {PaymentIntent} from "../../Model/payment-intent";
 import {environment} from "../../../../environment";
 import {ShoppingCartService} from "../../services/shopping-cart.service";
 import {OrderService} from "../../services/order.service";
-import {Order} from "../../Model/order";
+import {Router} from "@angular/router";
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -28,8 +25,6 @@ import {Order} from "../../Model/order";
 })
 export class CheckOutComponent implements AfterViewInit{
 
-  //@ViewChild(StripePaymentElementComponent)
-  //paymentElement!: StripePaymentElementComponent;
   @ViewChild('paymentElement') paymentElement!: ElementRef;
 
   stripe!: Stripe;
@@ -63,7 +58,7 @@ export class CheckOutComponent implements AfterViewInit{
     locale: 'en',
   };
   constructor(private http: HttpClient, private fb: FormBuilder, private stripeService: StripeService, private shoppingCartService: ShoppingCartService,
-              private orderService: OrderService) {
+              private orderService: OrderService, private router: Router) {
   }
   paymentForm: FormGroup = this.fb.group(
     {
@@ -78,23 +73,25 @@ export class CheckOutComponent implements AfterViewInit{
   payment_method: any;
 
   ngOnInit(): void {
+
     //this.elementsOptions.clientSecret = environment.stripe.testKey;
     this.amount = this.shoppingCartService.calculateTotal();
     console.log('shopping cart total: ',this.amount);
-    // this.createPaymentIntent(this.amount)
-    //   .subscribe(pi => {
-    //     this.elementsOptions.clientSecret = pi.client_secret;
-    //
-    //   });
+    this.createPaymentIntent(this.amount)
+      .subscribe(pi => {
+        this.elementsOptions.clientSecret = pi.client_secret;
+
+      });
   }
 
   ngAfterViewInit(): void {
     //this.stripe = this.stripeService.getInstance(); // Replace with your publishable key
-    this.elements = this.stripe.elements();
+    this.elements = this.paymentElement.nativeElement;//this.stripe.elements();
   }
   pay(){
+    this.createPaymentIntent(this.amount);
 
-
+    this.orderService.makeAnOrder(this.paymentForm.get('email')?.value);
      console.log('elementsoptions :', this.cardOptions)
     console.log('elements',this.paymentElement.nativeElement);
      if(this.paymentForm.valid){
@@ -125,9 +122,9 @@ export class CheckOutComponent implements AfterViewInit{
          }else{
            if(result.paymentIntent.status === 'succeeded'){
              alert({success: true});
-
-             this.orderService.createOrder(new Order());
-
+             this.shoppingCartService.showMessage('Payment was successful');
+             //this.orderService.createOrder(new Order());
+             this.router.navigate(['orders']);
            }
          }
        });
@@ -136,14 +133,13 @@ export class CheckOutComponent implements AfterViewInit{
      }
   }
 
+  private createPaymentIntent(amount: number): Observable<PaymentIntent> {
+    console.log('sending order')
+    return this.http.post<PaymentIntent>(
+      `${environment.paymentApiUrl}/order`,{amount}
+      //`${env.apiUrl}/create-payment-intent`,{amount}
+    );
 
-
-  // private createPaymentIntent(amount: number): Observable<PaymentIntent> {
-  //   return this.http.post<PaymentIntent>(
-  //     `${environment.paymentApiUrl}/create-payment-intent`,{amount}
-  //     //`${env.apiUrl}/create-payment-intent`,{amount}
-  //   );
-  //
-  // }
+  }
 
 }

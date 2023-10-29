@@ -3,6 +3,9 @@ import {Product} from "../../Model/product";
 import {ProductService} from "../../services/product.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorService} from "../../services/error.service";
 
 @Component({
   selector: 'app-edit-product',
@@ -16,7 +19,7 @@ export class EditProductComponent {
   submitted = false;
 
 
-  constructor(private productService: ProductService,
+  constructor(private productService: ProductService,private authService: AuthService, private errorService: ErrorService,
               public dialogRef: MatDialogRef<EditProductComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private router: Router) { }
@@ -30,7 +33,7 @@ export class EditProductComponent {
           console.log(data);
 
           this.product = data;
-        }, error => console.log(error));
+        }, (error:HttpErrorResponse) => this.errorService.getErrorMessage(error.status));
   }
 
   newPaymentDetails(): void {
@@ -41,17 +44,25 @@ export class EditProductComponent {
   save() {
 
     this.productService.updateProduct(this.id, this.product)
-        .subscribe(data => alert('Successfully updated!'),
-                error => alert('Data post error! Record could not be '+
-            'saved.'));
+        .subscribe(data => this.productService.showMessage('Product was successfully updated!'),
+          (error:HttpErrorResponse) => this.errorService.getErrorMessage(error.status));
     this.product = new Product();
-    //this.gotoList();
+    this.gotoList();
   }
 
   onSubmit() {
     this.submitted = true;
     this.save();
-    // this.onClose();
+     this.onClose();
+  }
+
+  approve() {
+    this.product.isApproved=true;
+    this.productService.updateProduct(this.id, this.product)
+      .subscribe(data => this.productService.showMessage('Successfully updated!'),
+        (error:HttpErrorResponse) => this.errorService.getErrorMessage(error.status));
+    this.product = new Product();
+    this.gotoList();
   }
 
   onClose(){
@@ -59,10 +70,31 @@ export class EditProductComponent {
   }
 
   gotoList() {
-    this.router.navigate(['/product-details']);
+    this.router.navigate(['products']);
   }
 
   onFileSelected(event: Event) {
 
   }
+
+  hasNoRole(){
+    return this.authService.hasNoRole();
+  }
+
+  isCustomer(): boolean {
+    return this.authService.isCustomer();
+
+  }
+
+  isVendor(): boolean {
+
+    return this.authService.isVendor();
+
+  }
+
+  isAdmin(): boolean {
+    return  this.authService.isAdmin();
+  }
+
+
 }

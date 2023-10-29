@@ -64,7 +64,7 @@
 
         </div>
 
-        <button type="submit" (click)="pay()" [disabled]="!paymentForm.valid">Pay $ {{amount}}</button>
+        <button type="submit" (click)="pay()" [disabled]="!paymentForm.valid">Order  {{amount| currency: 'USD' }}</button>
         <!--<button type="submit" (click)="pay(payment_method)">Submit Payment</button>-->
       </form>
       <div class="form-group">

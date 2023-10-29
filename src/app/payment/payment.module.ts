@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MakePaymentComponent } from './make-payment/make-payment.component';
 import {
   StripeCardComponent,
   StripeCardCvcComponent,
@@ -18,11 +17,10 @@ import {OrderModule} from "../order/order.module";
 
 @NgModule({
     declarations: [
-        MakePaymentComponent,
         CheckOutComponent
     ],
     exports: [
-        MakePaymentComponent
+      CheckOutComponent
     ],
   imports: [
     CommonModule,

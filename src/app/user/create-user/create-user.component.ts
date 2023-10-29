@@ -7,6 +7,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {User} from "../../Model/user";
 import {UserService} from "../../services/user.service";
+import {ErrorService} from "../../services/error.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-user',
@@ -19,7 +21,7 @@ export class CreateUserComponent {
   display: any;
   registerForm!: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private errorService: ErrorService, private router: Router) {}
 
 
   ngOnInit(){
@@ -27,15 +29,16 @@ export class CreateUserComponent {
     this.registerForm = new FormGroup<any>({
       'firstname':new FormControl(''),
       'lastname':new FormControl(''),
-      'email': new FormControl(''),
-      'phone': new FormControl(''),
+      'email': new FormControl('',Validators.email),
+      'phone': new FormControl('',[Validators.pattern(/^\d{10}$/)]),
       'password': new FormControl(''),
       'password2': new FormControl(''),
       'role': new FormControl(''),
       'street': new FormControl(''),
       'city': new FormControl(''),
       'state': new FormControl(''),
-      'zipcode': new FormControl(''),
+      'zipcode': new FormControl('',[
+        Validators.pattern(/^\d{5}(-\d{4})?/),])
     });
   }
 
@@ -51,10 +54,11 @@ export class CreateUserComponent {
       () => {
         // Redirect to the login page after successful registration
         // You can use the Router for navigation
-        this.router.navigate(['/user-list'])
+        this.authService.showMessage('You successfully registered!')
+        this.router.navigate(['login'])
       },
-      error => {
-        console.error('Registration failed:', error);
+      (error: HttpErrorResponse ) => {
+        alert(this.errorService.getErrorMessage(error.status));
       }
     );
 

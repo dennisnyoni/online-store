@@ -8,6 +8,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {ShipInService} from "../../services/ship-in.service";
 import {ShipIn} from "../../Model/ship-in";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorService} from "../../services/error.service";
 
 @Component({
   selector: 'app-create-ship-in',
@@ -16,7 +18,7 @@ import {ShipIn} from "../../Model/ship-in";
 })
 export class CreateShipInComponent {
 
-
+  id!:number;
   product!: Product;
   shipIn!: ShipIn;
   products: Product[] = [];
@@ -25,26 +27,25 @@ export class CreateShipInComponent {
   name!: string;
   shipInForm!: FormGroup;
   productFormData!: FormData;
-  shipInEventType!:string;
 
-  constructor(private productService: ProductService, private shipInService: ShipInService,private authService: AuthService,
+  constructor(private productService: ProductService, private shipInService: ShipInService,private authService: AuthService, private errorService: ErrorService,
               public dialogRef: MatDialogRef<CreateShipInComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private  router: Router) {
   }
   ngOnInit(): void{
-    //this.images = [];
+    console.log('ship-in date :', new Date());
     this.product = new Product();
-    this.productFormData = new FormData();
-      this.productService.getProductList().subscribe(products =>
-         this.products = products);
-      this.vendorProducts = this.products.filter(product =>product.userId = this.authService.decodeJwtToken(this.authService.getToken()).userId);
+    this.id = this.data.id;
 
+    this.productService.getProductById(this.id)
+      .subscribe(data => {
+        console.log(data);
+
+        this.product = data;
+      }, (error: HttpErrorResponse) => alert(this.errorService.getErrorMessage(error.status)));
       this.shipInForm = new FormGroup({
-
-      productId : new FormControl( '',Validators.required),
       quantity : new FormControl('',Validators.required),
-      //shipEventType: new FormControl('',Validators.required),
 
     });
 
@@ -55,37 +56,25 @@ export class CreateShipInComponent {
     this.product = new Product();
   }
 
-
-
   onSubmit(data: any){
+    this.shipIn = new ShipIn();
     console.log('current user role :',this.authService.decodeJwtToken(this.authService.getToken()).role);
-
-    for(let product of this.vendorProducts){
-      if(product.productId == this.shipInForm.get('productId')?.value){
-        this.product = product;
-        this.shipIn.product = this.product;
-      }
-    }
-
-    let response='';
-    //this.shipIn.shipInEventType = this.shipInForm.value.shipInEventType;//.get('shipInEventType')?.value;
-    //this.shipIn.quantity = this.shipInForm.get('quantity')?.value;
+    this.shipIn.product = this.product;
     this.shipIn.quantity = this.shipInForm.get('quantity')?.value;
-
     this.shipIn.shipmentDate = new Date();
+
     this.shipInService.createShipIn(this.shipIn).subscribe(
-      data => console.log(data),
-      error => alert(error)
+      data => this.shipInService.showMessage('Ship-in successfully added'),
+      (error: HttpErrorResponse) => alert(this.errorService.getErrorMessage(error.status))
     );
   }
-
 
   private onClose() {
     this.dialogRef.close();
   }
 
   gotoList(){
-    this.router.navigate(['/shipins']);//.then();
+    this.router.navigate(['ship-ins']);//.then();
   }
 
 

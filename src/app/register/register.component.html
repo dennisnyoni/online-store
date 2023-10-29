@@ -60,8 +60,8 @@
                         <mat-label>User type</mat-label>
                         <mat-select formControlName="role" required>
                             <mat-option value=""></mat-option>
-                            <mat-option value="ROLE_CUSTOMER">Customer</mat-option>
-                            <mat-option value="ROLE_VENDOR">Vendor</mat-option>
+                            <mat-option value="CUSTOMER">Customer</mat-option>
+                            <mat-option value="VENDOR">Vendor</mat-option>
                             <!--<mat-option value="ADMIN">Administrator</mat-option>-->
                         </mat-select>
                         <mat-error>user type must be selected</mat-error>
@@ -95,8 +95,8 @@
                         <mat-error>zip code is required</mat-error>
                     </mat-form-field>
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i></button>
-
+                <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"><i class="bi bi-box-arrow-in-right"></i></button>
+              <button mat-raised-button class="btn btn-danger" (click)="onClose()">Cancel</button>
             </form>
         </mat-card-content>
     </mat-card>

@@ -1,1 +1,119 @@
-<p>edit-user works!</p>
+<mat-card>
+  <mat-card-title><h2>Edit User Information</h2></mat-card-title>
+  <mat-card-content>
+    <form class="formwidth" (ngSubmit)="onSubmit()" #editUserForm="ngForm">
+
+
+      <br />
+
+      <table class="fullwidth" cellspacing="0">
+        <tr>
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="username" id="username" [(ngModel)]="user.userName" name="username"
+                     required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="first name" id="firstName" [(ngModel)]="user.firstName" name="nameFirst"
+                     required>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="last name" id="lastName" [(ngModel)]="user.lastName"
+                     name="lastName" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="email" id="email" [(ngModel)]="user.email" name="email"
+                     required>
+            </mat-form-field>
+          </td>
+
+          <td>
+
+            user.
+            <mat-form-field>
+              <input matInput placeholder="phone" id="phone" [(ngModel)]="user.phone"
+                     name="phone" required>
+            </mat-form-field>
+
+          </td>
+        </tr>
+        <tr>
+
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="role" id="role" [(ngModel)]="user.role"
+                     name="role" required>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="active?" id="active" [(ngModel)]="user.isActive"
+                     name="active">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+          <textarea matInput placeholder="street" id="street" [(ngModel)]="user.address.street" name="street"
+                    required></textarea>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="city" id="city" [(ngModel)]="user.address.city" name="city">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput type="text" placeholder="state" id="state" [(ngModel)]="user.address.state"
+                     name="state" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput type="number" placeholder="zipcode" id="zipcode" [(ngModel)]="user.address.state"
+                     name="state" required>
+            </mat-form-field>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button *ngIf="isVendor()" mat-raised-button type="submit" class="btn btn-success" [disabled]="!editUserForm.valid ">Submit</button>
+
+          </td>
+
+          <td>
+            <button mat-raised-button class="btn btn-danger" (click)="onClose()">Cancel</button>
+          </td>
+
+
+        </tr>
+      </table>
+
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
+

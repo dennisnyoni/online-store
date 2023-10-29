@@ -6,7 +6,6 @@ import {CreateProductComponent} from "./product/create-product/create-product.co
 import {EditProductComponent} from "./product/edit-product/edit-product.component";
 import {ProductDetailsComponent} from "./product/product-details/product-details.component";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart/shopping-cart.component";
-import {MakePaymentComponent} from "./payment/make-payment/make-payment.component";
 import {HomeComponent} from "./home/home/home.component";
 import {LoginComponent} from "./login/login.component";
 import {AuthGuardService} from "./services/auth-guard.service";
@@ -16,23 +15,34 @@ import {CreateUserComponent} from "./user/create-user/create-user.component";
 import {UserDetailsComponent} from "./user/user-details/user-details.component";
 import {DeleteUserComponent} from "./user/delete-user/delete-user.component";
 import {CheckOutComponent} from "./payment/check-out/check-out.component";
+import {OrderListComponent} from "./order/order-list/order-list.component";
+import {OrderDetailsComponent} from "./order/order-details/order-details.component";
+import {EditUserComponent} from "./user/edit-user/edit-user.component";
+import {CreateShipInComponent} from "./ship-in/create-ship-in/create-ship-in.component";
 
 
 const routes: Routes = [
+
     {path: '', component: HomeComponent},
     {path: 'products', component: ProductListComponent},
     {path: 'add-product', component: CreateProductComponent},  //canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR'] }}, //canActivate: [AuthGuard]},
-    {path: 'edit-product', component: EditProductComponent}, //canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR', 'ADMIN'] }}, //canActivate: [AuthGuard]},
-    {path: 'product-details', component: ProductDetailsComponent},
+    {path: 'products/:id', component: EditProductComponent}, //canActivate: [AuthGuardService], data: { expectedRoles: ['VENDOR', 'ADMIN'] }}, //canActivate: [AuthGuard]},
+    {path: 'products/:id', component: ProductDetailsComponent},
     {path: 'shopping-cart', component: ShoppingCartComponent},
-    {path: 'make-payment', component: MakePaymentComponent},
+    //{path: 'make-payment', component: MakePaymentComponent},
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
   { path: 'user-list', component: UserListComponent },
   { path: 'add-user', component: CreateUserComponent },
-  { path: 'user-details', component: UserDetailsComponent },
+  { path: 'users/:id', component: UserDetailsComponent },
+  { path: 'users/:id', component: EditUserComponent },
+  { path: 'edit-credentials', component: EditUserComponent },
   { path: 'delete-user', component: DeleteUserComponent },
   { path: 'check-out', component: CheckOutComponent },
+  { path: 'orders', component: OrderListComponent },
+  { path: 'orders/:id', component: OrderDetailsComponent },
+    { path: 'ship-in', component: CreateShipInComponent },
+    { path: 'ship-ins', component: CreateShipInComponent },
 ]
 
 @NgModule({

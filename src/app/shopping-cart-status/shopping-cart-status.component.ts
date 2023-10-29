@@ -14,16 +14,22 @@ export class ShoppingCartStatusComponent {
 
   constructor(private shoppingCartService: ShoppingCartService) {
 
+    //this.totalQuantity = this.shoppingCartService.getTotalItems();
+    //this.total = this.shoppingCartService.calculateTotal();
     //this.total = shoppingCartService.;
-    for(let item of this.shoppingCartService.getCartItems()){
-      this.totalQuantity += item.quantity;
-    }
+    // for(let item of this.shoppingCartService.getCartItems()){
+    //   //this.totalQuantity += item.quantity;
+    //   this.totalQuantity = this.shoppingCartService.getTotalItems()
+    // }
   }
 
   ngOnInit(){
-    for(let item of this.shoppingCartService.getCartItems()){
-      this.totalQuantity += item.quantity;
-    }
+    this.totalQuantity = this.shoppingCartService.getTotalItems();
+    this.total = this.shoppingCartService.calculateTotal();
+    // for(let item of this.shoppingCartService.getCartItems()){
+    //   //this.totalQuantity += item.quantity;
+    //
+    // }
 
   }
 }

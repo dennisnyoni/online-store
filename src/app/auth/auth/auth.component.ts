@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorService} from "../../services/error.service";
 
 @Component({
   selector: 'app-auth',
@@ -12,10 +14,9 @@ export class AuthComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private errorService: ErrorService, private router: Router) {}
 
   ngOnInit(){
-    //console.log('token :',this.authService.decodeJwtToken('eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6ImpkMkBlbWFpbC5jb20iLCJ1c2VySWQiOiJ1c2VyaWR8MiwwIiwicm9sZXMiOiJVc2VyIiwiZmlyc3ROYW1lIjoiam9obiIsImxhc3ROYW1lIjoiZG9lIiwic3ViIjoiamQyQGVtYWlsLmNvbSIsImlhdCI6MTY5NzQ3NzMwMiwiZXhwIjoxNjk3NTQyMTAyfQ.ikogfT-wTvi3uKuSSTt_MTJ4D2-RSRNIusfVSFuLoL8AQjbqzGMcrySZHFyAotLuyj3NOjYWi2r5iBFKEkCSYw'));
 
   }
 
@@ -25,9 +26,9 @@ export class AuthComponent {
            // Redirect to the home page or desired route after successful login
           this.router.navigate(['products'])
         },
-        error => {
+      (error: HttpErrorResponse) => {
+          alert(this.errorService.getErrorMessage(error.status));
 
-          console.error('Login failed:', error);
         }
     );
   }

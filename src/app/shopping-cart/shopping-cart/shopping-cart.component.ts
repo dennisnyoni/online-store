@@ -30,7 +30,7 @@ export class ShoppingCartComponent {
 
   calculateTotal(): number {
 
-    return this.cartService.calculateTotal();
+    return 0;//this.cartService.calculateTotal();
   }
 
   itemsInCart(): number{

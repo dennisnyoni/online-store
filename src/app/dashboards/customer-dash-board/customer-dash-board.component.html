@@ -12,9 +12,16 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/products">Start shopping</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/orders">Your orders</a>
+      </li>
+
     </ul>
   </div>
   <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <button type="button" (click)="logout()">Logout</button>
+    </li>
     <li class="nav-item">
       <label>Welcome </label>
     </li>
@@ -32,7 +39,8 @@
       </a>
     </li>
     <li class="nav-item">
-      <app-shopping-cart-status></app-shopping-cart-status>
+      {{totalQuantity}}
+      <!--<app-shopping-cart-status></app-shopping-cart-status>-->
     </li>
   </ul>
 </nav>

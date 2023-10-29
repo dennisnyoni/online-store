@@ -4,3 +4,10 @@ html, body { height: 100%; }
 body { margin: 10px; bottom:10px; top: 5px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-card { margin: 3%; padding: 1%; box-shadow: black}
 mat-form-field { width: 100%;}
+body {
+  background-image: url('src/assets/image4.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* Additional styling properties as needed */
+}

@@ -3,8 +3,6 @@ import { NgxStripeModule } from "ngx-stripe";
 //import { StripeModule } from "ngx-stripe";
 import { environment } from "../../environment";
 import { BrowserModule } from '@angular/platform-browser';
-//import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-//import { JwtInterceptor } from './jwt-interceptor';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +34,14 @@ import { FileUploadModule } from "ng2-file-upload";
 import { SearchComponent } from './search/search.component';
 import {UserModule} from "./user/user.module";
 import { GuestDashBoardComponent } from './dashboards/guest-dash-board/guest-dash-board.component';
+import {OrderModule} from "./order/order.module";
+import {CreateOrderComponent} from "./order/create-order/create-order.component";
+//import { ShipInComponent } from './ship-in/ship-in.component';
+import { CreateShipInComponent } from './ship-in/create-ship-in/create-ship-in.component';
+import { ShipInListComponent } from './ship-in/ship-in-list/ship-in-list.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatDatepicker} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 
 export function jwtOptionsFactory() {
     return {
@@ -56,51 +62,63 @@ export function jwtOptionsFactory() {
     AdminDashBoardComponent,
     VendorDashBoardComponent,
     CustomerDashBoardComponent,
-      RegisterComponent,
-      SearchComponent,
-      GuestDashBoardComponent
+    RegisterComponent,
+    SearchComponent,
+    GuestDashBoardComponent,
+    //ShipInComponent,
+    CreateShipInComponent,
+    ShipInListComponent,
+
+
   ],
 
-    imports: [
-        NgxStripeModule.forRoot(environment.stripe.publicKey),
-        BrowserModule,
-        BrowserAnimationsModule,
-        ProductModule,
-        HttpClientModule,
-        MatDialogModule,
-      MatButtonModule,
-      MatIconModule,
-        PaymentModule,
-      UserModule,
-        ShoppingCartModule,
-        AppRoutingModule,
-        RouterTestingModule,
-        FormsModule,
-        MatCardModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        FileUploadModule,
-        JwtModule.forRoot({
-            jwtOptionsProvider: {
-                provide: JWT_OPTIONS,
-                useFactory: jwtOptionsFactory,
-            },
-        }),
+  imports: [
+    NgxStripeModule.forRoot(environment.stripe.publicKey),
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    //ProductModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    //PaymentModule,
+    UserModule,
+    //OrderModule,
+    ShoppingCartModule,
+    AppRoutingModule,
+    RouterTestingModule,
+    FormsModule,
+    MatCardModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    FileUploadModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+      },
+    }),
 
-    ],
+  ],
   providers: [
     HttpClientModule,
     MatDialogModule,
-      JwtInterceptor,
+    JwtInterceptor,
     {
-      provide:MatDialogRef,
-      useValue:[]
-    },{
-    provide: MAT_DIALOG_DATA,
-      useValue:[]
-    }
-      ],
-  bootstrap:[AppComponent]
+      provide: MatDialogRef,
+      useValue: []
+    }, {
+      provide: MAT_DIALOG_DATA,
+      useValue: []
+    },
+    {provide: MAT_DATE_LOCALE, useValue: 'en-US' }
+  ],
+  exports: [
+    CreateShipInComponent
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

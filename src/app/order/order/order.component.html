@@ -1,0 +1,12 @@
+<div class="order-details">
+  <h2>Order Details</h2>
+  <div *ngFor="let orderItem of order.items">
+    Name: {{orderItem.name}}   Price: {{orderItem.price}}   Quantity: {{orderItem.quantity}}
+  </div>
+  <!-- Display order details here, such as product information, quantity, total price, etc. -->
+</div>
+<form (ngSubmit)="confirmOrder()">
+
+  <button type="submit">Confirm Order</button>
+</form>
+

@@ -30,26 +30,44 @@ export class Item {
 }
 
 export class Order {
-  private _orderNumber!: bigint;
-  private _items!: Item[];
-  private _total!: number;
+
+  private _id!:number;
   private _orderedDate!: Date;
-  private _updateDate!: Date;
-  private _userId!: string;
-  private _status!: string;
+  private _orderStatus!: string;
+  private _paymentStatus!: string;
+  private _total!: number;
+  private _totalQuantity!: number;
+  private _userEmail!: string;
+  private _orderNumber!: bigint; //required on the bac
+  private _items!: Item[];
+  //private _updateDate!: Date;
 
-  public get status(){
-    return this._status
+  public get id(){
+    return this._id
   }
-  public set status(value){
-    this._status = value;
+  public set id(value){
+    this._id= value;
   }
 
-  public get updateDate(){
-    return this._updateDate
+  public get paymentStatus(){
+    return this._paymentStatus
   }
-  public set updateDate(value){
-    this._updateDate = value;
+  public set paymentStatus(value){
+    this._paymentStatus= value;
+  }
+
+  public get orderStatus(){
+    return this._orderStatus
+  }
+  public set orderStatus(value){
+    this._orderStatus= value;
+  }
+
+  public get totalQuantity(){
+    return this._totalQuantity
+  }
+  public set totalQuantity(value){
+    this._totalQuantity = value;
   }
 
   public get orderedDate(){
@@ -82,11 +100,11 @@ export class Order {
     this._total = value;
   }
 
-  public get client (){
-    return this._userId;
+  public get userEmail(){
+    return this._userEmail;
   }
 
-  public set userId (value: string){
-    this._userId = value;
+  public set userEmail (value: string){
+    this._userEmail= value;
   }
 }

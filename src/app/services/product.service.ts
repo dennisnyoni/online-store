@@ -2,15 +2,23 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../Model/product";
+import {environment} from "../../../environment";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  productBaseUrl:string = 'localhost:8889/product-service';
-  constructor(private http: HttpClient) { }
+  productBaseUrl:string = environment.productBaseUrl;
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
+
+  showMessage(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 2000, // Duration in milliseconds (2 seconds)
+    });
+  }
     getProductById(id: number): Observable<any>{
     return this.http.get(`${this.productBaseUrl}/${id}`);
   }
@@ -18,6 +26,12 @@ export class ProductService {
   createProduct(formData: FormData): Observable<any>{
     return this.http.post(`${this.productBaseUrl}`, formData);
   }
+
+  createShipin(id: number, value: any): Observable<any>{
+    return this.http.post(`${this.productBaseUrl}/${id}`, value);
+  }
+
+  ///shipin
 
   updateProduct(id: number, value: any): Observable<any>{
     return this.http.put(`${this.productBaseUrl}/${id}`,value);

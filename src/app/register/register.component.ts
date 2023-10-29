@@ -5,6 +5,8 @@ import {User} from "../Model/user";
 import {FormControl, FormGroup} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {ErrorService} from "../services/error.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-register',
@@ -17,7 +19,7 @@ export class RegisterComponent {
   display: any;
   registerForm!: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private errorService: ErrorService, private router: Router) {}
 
 
   ngOnInit(){
@@ -49,29 +51,23 @@ console.log(userData);
         () => {
           // Redirect to the login page after successful registration
           // You can use the Router for navigation
-          this.router.navigate(['/products'])
+          this.authService.showMessage('you have successfully registered!')
+          this.router.navigate(['login']);
         },
-        error => {
-          console.error('Registration failed:', error);
+      (error: HttpErrorResponse) => {
+          alert(this.errorService.getErrorMessage(error.status));
         }
     );
 
 
   }
 
-  registerCustomer(){
-
-  }
-
-  registerVendor(){
-
-  }
-
-  registerAdmin(){
-
-  }
   onSubmit(data: any) {
     console.log('Submiting user data');
     this.register();
+  }
+
+  onClose() {
+
   }
 }

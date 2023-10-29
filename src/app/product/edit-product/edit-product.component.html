@@ -24,14 +24,14 @@
         <tr>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Product name" id="productName" [(ngModel)]="product.name" name="name"
+              <input matInput placeholder="Product name" id="productName" [(ngModel)]="product.productName" name="name"
                      required>
             </mat-form-field>
           </td>
 
           <td>
             <mat-form-field>
-              <input matInput placeholder="Available quantity" id="surname" [(ngModel)]="product.availableQuantity"
+              <input matInput placeholder="Available quantity" id="availableQuantity" [(ngModel)]="product.availableQuantity"
                      name="availableQuantity" required>
             </mat-form-field>
           </td>
@@ -62,7 +62,7 @@
 
           <td>
             <mat-form-field>
-              <input matInput placeholder="Vendor id" id="vendorId" [(ngModel)]="product.vendorId"
+              <input matInput placeholder="Vendor id" id="vendorId" [(ngModel)]="product.userId"
                      name="vendorId" required>
             </mat-form-field>
           </td>
@@ -91,7 +91,7 @@
         <tr>
           <td>
             <mat-form-field>
-              <input matInput type="number" placeholder="Unit price" id="unitPrice" [(ngModel)]="product.unitPrice"
+              <input matInput type="number" placeholder="Unit price" id="unitPrice" [(ngModel)]="product.productPrice"
                      name="unitPrice" required>
             </mat-form-field>
           </td>
@@ -102,7 +102,12 @@
         </tr>
         <tr>
           <td>
-            <button type="submit" class="btn btn-success" [disabled]="!editStudentForm.valid ">Submit</button>
+            <button *ngIf="isVendor()" mat-raised-button type="submit" class="btn btn-success" [disabled]="!editStudentForm.valid ">Submit</button>
+
+          </td>
+
+          <td>
+            <button *ngIf="isAdmin()" mat-raised-button type="submit" class="btn btn-success" [disabled]="!editStudentForm.valid " (click)="approve()" >Approve</button>
 
           </td>
 

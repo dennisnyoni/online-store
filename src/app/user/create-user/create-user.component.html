@@ -23,7 +23,7 @@
         </div>
         <div>
           <mat-form-field style="margin-right:2rem; width:40%">
-            <mat-label><i class="bi bi-envelope-at"></i></mat-label>
+            <mat-label><i class="bi bi-envelope-at">username</i></mat-label>
             <input matInput id="email" type="email" placeholder="email" name="email"
                    formControlName="email" required/>
             <mat-error>email is required</mat-error>
@@ -95,7 +95,7 @@
           </mat-form-field>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i></button>
+        <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"><i class="bi bi-box-arrow-in-right"></i></button>
         <button type="submit" class="btn btn-danger"><i class="bi bi-x-square"></i></button>
 
       </form>
@@ -105,3 +105,4 @@
 </div>
 
 
+[disabled]="myForm.invalid"

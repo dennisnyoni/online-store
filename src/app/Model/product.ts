@@ -27,41 +27,42 @@ export class ShipOut {
 
 }
 
-export class ShipIn {
-  private _shipmentId!: number;
-  private _shipmentDate!: Date;
-  private _quantity!: number;
-
-  public get shipmentId(){
-    return this._shipmentId;
-  }
-  public set shipmentId(value){
-    this._shipmentId= value;
-  }
-
-  public get shipmentDate(){
-    return this._shipmentDate;
-  }
-  public set shipmentDate(value){
-    this._shipmentDate= value;
-  }
-  public get quantity(){
-    return this._quantity;
-  }
-  public set quantity(value){
-    this._quantity= value;
-  }
-}
+// export class ShipIn {
+//   private _shipmentId!: number;
+//   private _shipmentDate!: Date;
+//   private _quantity!: number;
+//
+//   public get shipmentId(){
+//     return this._shipmentId;
+//   }
+//   public set shipmentId(value){
+//     this._shipmentId= value;
+//   }
+//
+//   public get shipmentDate(){
+//     return this._shipmentDate;
+//   }
+//   public set shipmentDate(value){
+//     this._shipmentDate= value;
+//   }
+//   public get quantity(){
+//     return this._quantity;
+//   }
+//   public set quantity(value){
+//     this._quantity= value;
+//   }
+// }
 
 export class Product {
-  private _name!: string;//
+  private _productName!: string;//
   private _productId!: number;
-  private _unitPrice!: number;//
+  private _productPrice!: number;//
+  private _productType!: string;//
   private _category!: number;//
-  private _images!: File[];//
+  private _image!: File;//
   private _description!: string;//
   private _isApproved!: boolean;
-  private _vendorId!: string;
+  private _userId!: string;
   private _availableQuantity!: number;
   private _status: string = 'available';
   private _dateAdded: Date= new Date();
@@ -87,18 +88,25 @@ export class Product {
   public set availableQuantity(value){
     this._availableQuantity= value;
   }
-  public get vendorId(){
-    return this._vendorId;
+  public get userId(){
+    return this._userId;
   }
-  public set vendorId(value){
-    this._vendorId = value;
+  public set userId(value){
+    this._userId = value;
   }
 
-  public get unitPrice(){
-    return this._unitPrice;
+  public get productType(){
+    return this._productType;
   }
-  public set unitPrice(value){
-    this._unitPrice = value;
+  public set productType(value){
+    this._productType = value;
+  }
+
+  public get productPrice(){
+    return this._productPrice;
+  }
+  public set productPrice(value){
+    this._productPrice = value;
   }
 
   public get category(){
@@ -108,11 +116,11 @@ export class Product {
     this._category = value;
   }
 
-  public get images(){
-    return this._images;
+  public get image(){
+    return this._image;
   }
-  public set images(value){
-    this._images = value;
+  public set image(value){
+    this._image = value;
   }
 
   public get isApproved(){
@@ -121,17 +129,12 @@ export class Product {
   public set isApproved(value){
         this._isApproved = value;
     }
-  /*public get vendor(){
-    return this._vendor;
+
+  public get productName(){
+    return this._productName;
   }
-  public set vendor(value: Vendor){
-    this._vendor = value;
-  }*/
-  public get name(){
-    return this._name;
-  }
-  public set name(value: string){
-    this._name = value;
+  public set productName(value: string){
+    this._productName = value;
   }
 
   public get productId(){

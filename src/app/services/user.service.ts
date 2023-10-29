@@ -4,13 +4,20 @@ import {Observable} from "rxjs";
 import {Client} from "../Model/client";
 import {User} from "../Model/user";
 import {environment} from "../../../environment";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userBaseUrl:string = environment.userBaseUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
+
+  showMessage(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 2000, // Duration in milliseconds (2 seconds)
+    });
+  }
 
   getUser(id: number): Observable<any>{
     return this.http.get(`${this.userBaseUrl}/${id}`);

@@ -3,16 +3,19 @@
   <mat-card-content>
 
     <div *ngIf="itemsInCart(); else cartEmpty">
+      <div id="item-list">
       <ul>
         <li *ngFor="let item of cartItems">
-          {{ item.name }} (Quantity: {{ item.quantity }}) - ${{ item.unitPrice * item.quantity }}
-          <button (click)="incrementQuantity(item)"><i class="fa-plus"></i></button>
-          <button (click)="decrementQuantity(item)"><i class="fa-minus-circle"></i></button>
-          <button (click)="removeFromCart(item)">Remove</button>
+
+          <b>Product</b>: {{ item.productName }} &nbsp; <b>Quantity</b> : {{ item.quantity }} &nbsp;<b>Unit price</b>: {{ item.productPrice }} &nbsp; <b>Subtotal</b>  : {{ item.productPrice * item.quantity| currency: 'USD' }}
+          <button (click)="incrementQuantity(item)" class="bt btn-primary" ><i class="bi bi-plus"></i></button>
+          <button (click)="decrementQuantity(item)" class="btn btn-secondary"><i class="bi bi-dash"></i></button>
+          <button (click)="removeFromCart(item)" class="btn btn-danger"><i class="bi bi-x"></i></button>
         </li>
       </ul>
-      <div>Total: ${{ calculateTotal() }}</div>
-      <button (click)="checkout()">Checkout</button>
+      <div>Total: {{ calculateTotal() | currency: 'USD' }}</div>
+      <button (click)="checkout()" class="btn btn-primary">Checkout</button>
+    </div>
     </div>
     <ng-template #cartEmpty>
       <h1>Cart is empty</h1>
