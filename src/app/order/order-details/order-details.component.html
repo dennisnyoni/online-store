@@ -1,0 +1,30 @@
+
+<mat-card>
+  <mat-card-title><h2>Oder Details</h2></mat-card-title>
+  <mat-card-content>
+    <div class="order-details">
+      <div class="image-carousel">
+
+      </div>
+      <div class="order">
+        <!--<img [src]="imageUrl" alt="{{ product.name }}" />-->
+        <p>order number : {{ order.orderNumber }}</p>
+        <h3>order date : {{ order.orderedDate }}</h3>
+        <h3>order status : {{ order.orderStatus }}</h3>
+        <p>total cost : {{ order.total }}</p>
+        <p>payment status : {{ order.paymentStatus}}</p>
+        <p>total number of items : {{ order.totalQuantity }}</p>
+
+        <span>Items:</span>
+        <div *ngFor="let item of order.items">
+          <img src="data:image/jpeg;base64,{{item.image}}" style="width: 80px; height:80px"  alt="Image of {{ item.productName }}"/>
+          <b>Product</b>: {{ item.productName }} &nbsp; <b>Quantity</b> : {{ item.quantity }} &nbsp;<b>Unit price</b>: {{ item.productPrice| currency: 'USD' }} &nbsp; <b>Subtotal</b>  : {{ item.productPrice * item.quantity| currency: 'USD' }}
+        </div>
+
+        <button class="btn btn-primary" (click)="list()">Order List>Order List</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
